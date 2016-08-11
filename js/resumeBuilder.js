@@ -4,16 +4,16 @@
 var bio = {
 	"name": "Veeraseth Wongsirikul",
 	"role": "Entrepreneur",
-	"welcomeMessage": "Hello!!",
-	"biopic": ["images/me.jpg"],
-	"skills": ["Excel", "Powerpoint", "HTML", "Business"],
 	"contacts": {
 		"mobile": "+66-86-3306000",
 		"email": "veeraseth@yahoo.com",
 		"github": "koogarang",
 		"twitter": "@koogarang",
 		"location": "Bangkok"
-	}
+	},
+	"welcomeMessage": "Hello!!",
+	"biopic": ["images/me.jpg"],
+	"skills": ["Excel", "Powerpoint", "HTML", "Business"]
 };
 
 // bio.display insert the data from var bio into an appropriate area of the resume
@@ -23,24 +23,18 @@ bio.display = function() {
 	$("#header").prepend(HTMLheaderName.replace("%data%", bio.name));
 	$("#header").append(HTMLbioPic.replace("%data%", bio.biopic));
 
-// to add the skills section in the resume only if at least one skill is available in bio.skills
-	if(bio.skills.length > 0) {
-		$("#header").append(HTMLskillsStart);
-		var formattedSkill = HTMLskills.replace("%data%", bio.skills[0]);
-		$("#skills").append(formattedSkill);
-		formattedSkill = HTMLskills.replace("%data%", bio.skills[1]);
-		$("#skills").append(formattedSkill);
-		formattedSkill = HTMLskills.replace("%data%", bio.skills[2]);
-		$("#skills").append(formattedSkill);
-		formattedSkill = HTMLskills.replace("%data%", bio.skills[3]);
+// to add the skills section in the resume
+	$("#header").append(HTMLskillsStart);
+	for(var i = 0; i < bio.skills.length; i++) {
+		var formattedSkill = HTMLskills.replace("%data%", bio.skills[i]);
 		$("#skills").append(formattedSkill);
 	}
 
-	$("#topContacts").append(HTMLmobile.replace("%data%", bio.contacts.mobile));
-	$("#topContacts").append(HTMLemail.replace("%data%", bio.contacts.email));
-	$("#topContacts").append(HTMLtwitter.replace("%data%", bio.contacts.twitter));
-	$("#topContacts").append(HTMLgithub.replace("%data%", bio.contacts.github));
-	$("#topContacts").append(HTMLlocation.replace("%data%", bio.contacts.location));
+	$("#topContacts,#footerContacts").append(HTMLmobile.replace("%data%", bio.contacts.mobile));
+	$("#topContacts,#footerContacts").append(HTMLemail.replace("%data%", bio.contacts.email));
+	$("#topContacts,#footerContacts").append(HTMLtwitter.replace("%data%", bio.contacts.twitter));
+	$("#topContacts,#footerContacts").append(HTMLgithub.replace("%data%", bio.contacts.github));
+	$("#topContacts,#footerContacts").append(HTMLlocation.replace("%data%", bio.contacts.location));
 
 	$("#header").append(HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage));
 };
@@ -64,9 +58,9 @@ var work = {
 	}]
 };
 
-// displaywork insert the data from var work into an appropriate area of the resume
+// work.display insert the data from var work into an appropriate area of the resume
 
-function displaywork() {
+work.display = function() {
 	for(var i = 0; i < work.jobs.length; i++) {
 		$("#workExperience").append(HTMLworkStart);
 		var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[i].employer);
@@ -82,7 +76,7 @@ function displaywork() {
 	}
 }
 
-displaywork();
+work.display();
 
 // var projects  stores necessary information to create the work section of the website
 var projects = {
@@ -124,16 +118,16 @@ var education = {
 		"name": "National Univeristy of Singapore",
 		"degree": "Master Degree",
 		"location": "Singapore",
+		"major": ["MBA"],
 		"dates": "2016",
-		"url": "http://www.nus.edu/",
-		"major": ["MBA"]
+		"url": "http://www.nus.edu/"
 	}, {
 		"name": "Thammasat University",
 		"degree": "Bachelor Degree",
 		"location": "Thailand",
+		"major": ["Economics", "Marketing"],
 		"dates": "2009",
-		"url": "http://www.tu.ac.th/",
-		"major": ["Economics", "Marketing"]
+		"url": "http://www.tu.ac.th/"
 	}],
 	"onlineCourses": [{
 		"title": "Intro to Programming Nanodegree",
